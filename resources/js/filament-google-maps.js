@@ -355,6 +355,12 @@ export default function filamentGoogleMapsField(
                             this.setSelection(event.overlay);
                         }
 
+                        window.addEventListener('keyup', function (e) {
+                            if (e.key === 'BACKSPACE') {
+                                window.currentSelection.setMap(null);
+                            }
+                        });
+
                         this.drawingModified();
                     });
                 }
@@ -746,6 +752,7 @@ export default function filamentGoogleMapsField(
         setSelection: function (shape) {
             this.clearSelection();
             this.selectedShape = shape;
+            window.currentSelection = shape;
             // shape.setEditable(true);
             // selectColor(shape.get('fillColor') || shape.get('strokeColor'));
             this.overlays.forEach(function (item) {
